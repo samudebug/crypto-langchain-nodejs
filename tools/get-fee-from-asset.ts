@@ -1,6 +1,6 @@
 import { DynamicStructuredTool } from "@langchain/core/tools";
-import axios from "axios";
 import * as z from "zod";
+import { api } from "../services/api";
 /**
  *
  * @param asset The name of the asset
@@ -8,7 +8,7 @@ import * as z from "zod";
  */
 async function getFeesFromAsset(asset: string): Promise<string> {
   try {
-    const response = await axios.get(`/${asset}/fees`);
+    const response = await api.get(`/${asset}/fees`);
     return `Withdrawal Fee: ${response.data.withdrawal_fee}\n Minimum Required: ${response.data.withdraw_minimum}`;
   } catch (error) {
     console.error("Error", error);

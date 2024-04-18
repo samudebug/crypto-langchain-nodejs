@@ -1,6 +1,6 @@
 import { DynamicStructuredTool } from "@langchain/core/tools";
-import axios from "axios";
 import * as z from "zod";
+import { api } from "../services/api";
 
 /**
  * Retrieves the networks associated with an asset
@@ -10,7 +10,7 @@ import * as z from "zod";
  */
 async function listNetworks(asset: string): Promise<string> {
   try {
-    const response = await axios.get(`/${asset}/networks`);
+    const response = await api.get(`/${asset}/networks`);
     return JSON.stringify(response.data);
   } catch (error) {
     console.log("Error", error);
